@@ -46,17 +46,16 @@ const IMAGES = [
   },
 ];
 
-console.log(IMAGES);
-
 const newBlock = document.createDocumentFragment();
 IMAGES.forEach((item) => {
   const newDiv = document.createElement("div");
   newDiv.id = `item-${item.id}`;
   newDiv.className = "item col-lg-4";
 
+  const pathName = window.location.href
   const newImg = document.createElement("img");
   newImg.alt = item.name;
-  newImg.src = item.src;
+  newImg.src = pathName + item.src;
   newDiv.appendChild(newImg);
 
   newBlock.appendChild(newDiv);
