@@ -24,6 +24,10 @@
       href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Explora&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Font-awesome -->
     <link
@@ -39,30 +43,43 @@
 
   <body>
     <header>
-      <div class="first">
-        <h6>A programmer mixed with a film photography</h6>
-      </div>
-      <div class="last">
-        <a href="https://www.facebook.com/chanh.nguyen.632" target="_blank">
-          <i class="fa-brands fa-facebook"></i>
-        </a>
-        <a href="https://www.instagram.com/chanh.phy" target="_blank">
-          <i class="fa-brands fa-instagram"></i>
-        </a>
-        <a href="https://twitter.com/nchanhtw" target="_blank">
-          <i class="fa-brands fa-twitter"></i>
-        </a>
-        <a href="https://github.com/nchanh" target="_blank">
-          <i class="fa-brands fa-github"></i>
-        </a>
+      <div class="row">
+        <div class="col-lg-6 first">
+          <h6>a mixture of programming and film photography</h6>
+        </div>
+        <div class="col-lg-6 last">
+          <a href="https://www.facebook.com/chanh.nguyen.632" target="_blank">
+            <i class="fa-brands fa-facebook"></i>
+          </a>
+          <a href="https://www.instagram.com/chanh.phy" target="_blank">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://twitter.com/nchanhtw" target="_blank">
+            <i class="fa-brands fa-twitter"></i>
+          </a>
+          <a href="https://github.com/nchanh" target="_blank">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </div>
       </div>
     </header>
 
     <main>
       <div class="row wrapper" id="wrapper"></div>
+      <div class="d-flex justify-content-center mt-4">
+        <button
+          class="btn btn-outline-light px-3"
+          id="buttonPaginate"
+          onclick="hdlClickPaginate()"
+        >
+          load more...
+        </button>
+      </div>
     </main>
 
-    <footer>Copyright &copy;2023 Nguyen Chanh. All Rights Reserved.</footer>
+    <footer>
+      &copy; 2019 - {{ $year }} Chanh Photography. All Rights Reserved.
+    </footer>
 
     <!-- Bootstrap JavaScript Libraries -->
     <script

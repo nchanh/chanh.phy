@@ -18,11 +18,9 @@ body {
 
 header {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 20px 25px;
-
+  -webkit-user-select: none;
+  -moz-user-select: none;
   user-select: none;
 }
 
@@ -30,9 +28,28 @@ header .first {
   color: var(--hex-0);
 }
 
+header .first h6 {
+  font-weight: 300;
+  font-size: 18px;
+}
+
+@media (max-width: 991.98px) {
+  header .first {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+}
+
 header .last {
   display: flex;
   gap: 30px;
+  justify-content: flex-end;
+}
+
+@media (max-width: 991.98px) {
+  header .last {
+    justify-content: center;
+  }
 }
 
 header .last a {
@@ -56,25 +73,87 @@ main .wrapper {
 main .wrapper .item {
   padding: 15px;
   overflow: hidden;
+  display: flex;
+  position: relative;
+
+  user-select: none;
 }
 
 main .wrapper .item img {
   padding: 0;
   width: 100%;
   cursor: pointer;
-
-  -webkit-filter: grayscale(100%);
   -moz-filter: grayscale(100%);
   filter: grayscale(100%);
   transition: all 0.5s ease;
 }
 
-main .wrapper .item img:hover {
-  -webkit-filter: grayscale(0%);
+main .wrapper .item:hover img {
   -moz-filter: grayscale(0%);
   filter: grayscale(0);
 
   transform: scale(1.01);
+}
+
+main .wrapper .item:hover .image-info {
+  opacity: 1;
+}
+
+main .wrapper .item .image-info {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  z-index: 3;
+
+  padding: 0 30px;
+
+  width: 100%;
+  text-align: center;
+
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+
+main .wrapper .item .image-info .btn-link {
+  border-color: var(--hex-0);
+  color: var(--hex-0);
+  border: 2px solid var(--hex-0);
+  text-transform: uppercase;
+  font-size: 11px;
+  text-decoration: none;
+  padding: 9px 24px 8px 23px;
+}
+main .wrapper .item .image-info .btn-link:hover {
+  background-color: var(--hex-0);
+  color: var(--hex-4);
+}
+
+main .wrapper .item .image-info .text {
+  color: var(--hex-0);
+  overflow: hidden;
+  white-space: pre-wrap;
+  font-size: 13px;
+
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+main .wrapper .item:hover .overlay {
+  background-color: rgba(0, 0, 0, 0.25);
+  transition: background 0.4s;
+}
+
+main .wrapper .item .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  z-index: 2;
+
+  height: 100%;
+  width: 100%;
 }
 
 footer {
