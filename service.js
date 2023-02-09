@@ -45,7 +45,101 @@ const IMAGES = [
       caption: "s3",
       media_url: "/assets/s3.jpg",
     },
-  ]
+  ],
+  [
+    {
+      id: 1,
+      caption: "m1",
+      media_url: "/assets/m1.jpg",
+    },
+    {
+      id: 2,
+      caption: "m2",
+      media_url: "/assets/m2.jpg",
+    },
+    {
+      id: 3,
+      caption: "m3",
+      media_url: "/assets/m3.jpg",
+    },
+    {
+      id: 4,
+      caption: "a1",
+      media_url: "/assets/a1.jpg",
+    },
+    {
+      id: 5,
+      caption: "a2",
+      media_url: "/assets/a2.jpg",
+    },
+    {
+      id: 6,
+      caption: "a3",
+      media_url: "/assets/a3.jpg",
+    },
+    {
+      id: 7,
+      caption: "s1",
+      media_url: "/assets/s1.jpg",
+    },
+    {
+      id: 8,
+      caption: "s2",
+      media_url: "/assets/s2.jpg",
+    },
+    {
+      id: 9,
+      caption: "s3",
+      media_url: "/assets/s3.jpg",
+    },
+  ],
+  [
+    {
+      id: 1,
+      caption: "m1",
+      media_url: "/assets/m1.jpg",
+    },
+    {
+      id: 2,
+      caption: "m2",
+      media_url: "/assets/m2.jpg",
+    },
+    {
+      id: 3,
+      caption: "m3",
+      media_url: "/assets/m3.jpg",
+    },
+    {
+      id: 4,
+      caption: "a1",
+      media_url: "/assets/a1.jpg",
+    },
+    {
+      id: 5,
+      caption: "a2",
+      media_url: "/assets/a2.jpg",
+    },
+    {
+      id: 6,
+      caption: "a3",
+      media_url: "/assets/a3.jpg",
+    },
+    {
+      id: 7,
+      caption: "s1",
+      media_url: "/assets/s1.jpg",
+    },
+    {
+      id: 8,
+      caption: "s2",
+      media_url: "/assets/s2.jpg",
+    },
+    {
+      id: 9,
+      caption: "s3",
+      media_url: "/assets/s3.jpg",
+    },
+  ],
 ];
 
 const isValid = (_posts, _idx) => _posts.length - 1 <= _idx;
@@ -105,11 +199,59 @@ const printPhotos = (_posts, _idx) => {
   hdlStatusBtnPaginate(_posts, _idx);
 };
 
+const eleLoading = document.getElementById("loading");
+const hdlHideLoading = () => {
+  eleLoading.style.display = "none";
+};
+const hdlShowLoading = (time = 0) => {
+  eleLoading.style.display = "block";
+
+  setTimeout(() => {
+    time !== 0 && hdlHideLoading();
+  }, time);
+};
+
+/*
+ ************************************************************
+ */
 let idx = 0;
 const posts = IMAGES;
+
+// init
+// hdlShowLoading()
 printPhotos(posts, idx);
+
+window.addEventListener("DOMContentLoaded", (event) => {
+  hdlShowLoading();
+});
+
+window.addEventListener("load", (event) => {
+  hdlHideLoading();
+});
+
+document.addEventListener("scroll", (event) => {
+  const scrollY = window.scrollY;
+  const elmHeader = document.getElementById("header");
+  if (scrollY >= 300) {
+    elmHeader.classList.add("header-scroll");
+  } else {
+    elmHeader.classList.remove("header-scroll");
+  }
+});
+
+/*
+ ************************************************************
+ */
 
 const hdlClickPaginate = () => {
   idx++;
   printPhotos(posts, idx);
+
+  hdlShowLoading(3000);
 };
+
+const hdlScrollBody = () => {
+  const elmMain = document.getElementById("main");
+  const subTop = screen.width >= 912 ? 20 : 40;
+  window.scrollBy(0, elmMain.offsetTop - subTop)
+}

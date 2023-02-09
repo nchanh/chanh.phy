@@ -14,14 +14,22 @@ body {
 
   font-family: "Josefin Sans", "Times New Roman", Times, serif;
   color: var(--hex-1);
+
+  position: relative;
 }
 
 header {
+  position: fixed;
+  z-index: 10;
+
   width: 100%;
-  padding: 20px 25px;
+  transition: all 0.4s ease;
+  padding: 20px 25px 10px 25px;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 header .first {
@@ -30,7 +38,8 @@ header .first {
 
 header .first h6 {
   font-weight: 300;
-  font-size: 18px;
+  transition: font-size 0.3s, color 0.3s;
+  font-size: 21px;
 }
 
 @media (max-width: 991.98px) {
@@ -46,10 +55,10 @@ header .last {
   justify-content: flex-end;
 }
 
-@media (max-width: 991.98px) {
-  header .last {
-    justify-content: center;
-  }
+header .last a {
+  color: var(--hex-0);
+  transition: font-size 0.3s, color 0.3s;
+  font-size: 19px;
 }
 
 header .last a {
@@ -60,12 +69,75 @@ header .last a:hover {
   color: var(--hex-0);
 }
 
+.header-scroll {
+  background-color: var(--hex-0);
+  padding: 12px 25px 0px 25px;
+  box-shadow: 0 0 5px grey;
+}
+
+.header-scroll h6 {
+  color: var(--hex-4) !important;
+  transition: font-size 0.3s, color 0.3s;
+  font-size: 17px !important;
+}
+
+.header-scroll .last a {
+  color: var(--hex-4) !important;
+  transition: font-size 0.3s, color 0.3s;
+  font-size: 15px;
+}
+
+section {
+  width: 100%;
+  height: 100vh;
+  background: url("/images/chanhphy.jpg") top right;
+  background-size: cover;
+  background-position: top center;
+  position: relative;
+}
+
+section::before {
+  content: "";
+  background: rgba(0, 0, 0, 0.65);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+section .hero-container {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 10vw;
+}
+
+section .hero-container h1 {
+  font-family: Josefin Sans;
+  letter-spacing: 1.1px;
+  font-weight: 600;
+  font-size: 60px;
+  line-height: 1;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--hex-0);
+  text-shadow: 0px 0px 5px black;
+}
+
 main {
   margin-bottom: 30px;
 }
 
 main .wrapper {
   padding: 15px;
+  padding-top: 60px;
   margin: 0;
   width: 100%;
 }
@@ -162,3 +234,140 @@ footer {
   font-weight: 100;
   color: var(--hex-2);
 }
+
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.loading .loading-overlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.loading-waviy {
+  position: fixed;
+  top: 50vh;
+  left: calc(50vw - 78px);
+}
+
+.loading-waviy span {
+  position: relative;
+  display: inline-block;
+  font-size: 26px;
+  color: #fff;
+  text-transform: uppercase;
+  animation: flip 2s infinite;
+  animation-delay: calc(0.2s * var(--i));
+}
+
+@keyframes flip {
+  0%,
+  80% {
+    transform: rotateY(360deg);
+  }
+}
+
+/*
+ * Start: Responsive
+ */
+@media (max-width: 991.99px) {
+  header .last {
+    justify-content: center;
+  }
+
+  header .first h6 {
+    font-size: 16px !important;
+  }
+
+  header {
+    padding: 10px 25px !important;
+  }
+
+  section .hero-container h1 {
+    font-size: 15px;
+  }
+}
+/*
+ * End: Responsive
+ */
+
+/*
+ * Start: Pure CSS Animated Mouse Scroll Icon
+ */
+.scroll-down-wrap {
+  position: absolute;
+  right: 0;
+  bottom: 14vh;
+  left: 0;
+  margin: auto;
+
+  width: 34px;
+  height: 55px;
+}
+
+.section-down-arrow {
+  width: 3px;
+  padding: 10px 15px;
+  height: 35px;
+  border: 2px solid var(--hex-3);
+  border-radius: 25px;
+  opacity: 0.75;
+  box-sizing: content-box;
+  animation: scrollMouse 2.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+
+  transition: all 0.4s;
+}
+
+.section-down-arrow:hover {
+  transition: all 0.4s;
+  border-color: var(--hex-0);
+}
+
+.section-down-arrow:hover .nectar-scroll-icon {
+  background-color: var(--hex-0);
+}
+
+.nectar-scroll-icon {
+  width: 3px;
+  height: 10px;
+  border-radius: 25%;
+  background-color: var(--hex-3);
+  animation: scrollMouseWheel 2.4s cubic-bezier(0, 0, 0.725, 1) infinite;
+}
+
+@keyframes scrollMouse {
+  0% {
+    transform: translateY(0);
+  }
+  45% {
+    transform: translateY(8px);
+  }
+  100%,
+  65% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollMouseWheel {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+}
+/*
+ * End: Pure CSS Animated Mouse Scroll Icon
+ */
