@@ -12,6 +12,10 @@
   --color-4: #65d9fe;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -21,6 +25,23 @@ body {
   color: var(--hex-1);
 
   position: relative;
+}
+
+.wrapper-scroll {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  height: 4px;
+  background: rgb(234, 234, 234);
+}
+
+.wrapper-scroll-indicator {
+  height: 100%;
+  width: 10%;
+  background-color: var(--hex-5);
 }
 
 header {

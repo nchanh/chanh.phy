@@ -343,6 +343,13 @@ document.addEventListener("scroll", () => {
   const scrollY = window.scrollY;
   const innerHeight = window.innerHeight;
 
+  // Scroll Indicator
+  const percentScrollBody =
+    (scrollY / (document.documentElement.scrollHeight - innerHeight)) * 100;
+  document.getElementById(
+    "wrapper-scroll-indicator"
+  ).style.width = `${percentScrollBody}%`;
+
   // Scroll of Header
   const elmHeader = document.getElementById("header");
   if (scrollY >= 300) {
