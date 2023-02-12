@@ -142,6 +142,36 @@ const IMAGES = [
   ],
 ];
 
+const COLORS = [
+  {
+    name: "color-1",
+    translateX: 200,
+    translateY: 400,
+    isNegativeX: true,
+    color: "#f0c74f",
+  },
+  {
+    name: "color-2",
+    translateX: 400,
+    translateY: 800,
+    isNegativeY: true,
+    color: "#f97d3f",
+  },
+  {
+    name: "color-3",
+    translateX: 400,
+    translateY: 800,
+    color: "#2c97ca",
+  },
+  {
+    name: "color-4",
+    translateX: 200,
+    translateY: 400,
+    isNegativeY: true,
+    color: "#65d9fe",
+  },
+];
+
 const isValid = (_posts, _idx) => _posts.length - 1 <= _idx;
 
 const hdlStatusBtnPaginate = (_posts, _idx) => {
@@ -211,31 +241,151 @@ const hdlShowLoading = (time = 0) => {
   }, time);
 };
 
+const hdlShowBackground = (item, percent, isShowFull = false) => {
+  const elmWrapperColor = document.getElementById("wrapper-color");
+
+  const bgColor14 = `
+linear-gradient(
+to right,
+#f0c74f 0%,
+#65d9fe 100%
+)
+`;
+
+  const bgColorFull = `
+linear-gradient(
+to right,
+#f0c74f 0%,
+#f97d3f 37.5%,
+#2c97ca 62.75%,
+#65d9fe 100%
+)
+`;
+
+  if (item.name === "color-1" || item.name === "color-4") {
+    if (percent >= 100) {
+      elmWrapperColor.style.background = bgColor14;
+    } else {
+      elmWrapperColor.style.background = "none";
+    }
+  }
+
+  if (item.name === "color-2" || item.name === "color-3") {
+    if (percent >= 100) {
+      elmWrapperColor.style.background = bgColorFull;
+    } else {
+      elmWrapperColor.style.background = bgColor14;
+    }
+  }
+};
+
+const hdlShowColor = (percent) => {
+  const addNegative = (isNegative) => (isNegative ? "-" : "");
+
+  COLORS.forEach((item) => {
+    const elmColor = document.getElementById(item.name);
+
+    let newPercent = percent;
+    if (item.name === "color-2" || item.name === "color-3") {
+      newPercent = newPercent - 20;
+      hdlShowBackground(item, newPercent, true);
+    }
+
+    if (newPercent > 100) {
+      elmColor.style.transform = `translate(0%, 0%)`;
+      return;
+    }
+
+    const translateX = item.translateX - (item.translateX / 100) * newPercent;
+    const translateY = item.translateY - (item.translateY / 100) * newPercent;
+
+    elmColor.style.transform = `translate(${addNegative(
+      item.isNegativeX
+    )}${translateX}%, ${addNegative(item.isNegativeY)}${translateY}%)`;
+
+    hdlShowBackground(item, newPercent);
+  });
+};
+
+const hdlShowText = (percentDetail) => {
+  document
+    .getElementById("color-title")
+    .style.setProperty("--slash", `${percentDetail - 30}%`);
+
+  const elmSubtitle = document.getElementById("color-subtitle");
+  if (percentDetail >= 110) {
+    elmSubtitle.style.opacity = 1;
+  } else {
+    elmSubtitle.style.opacity = 0;
+  }
+};
+
 /*
  ************************************************************
  */
 let idx = 0;
 const posts = IMAGES;
+let clipPathHeight = 0;
 
 // init
 // hdlShowLoading()
 printPhotos(posts, idx);
 
-window.addEventListener("DOMContentLoaded", (event) => {
+window.addEventListener("DOMContentLoaded", () => {
   hdlShowLoading();
 });
 
-window.addEventListener("load", (event) => {
+window.addEventListener("load", () => {
   hdlHideLoading();
 });
 
-document.addEventListener("scroll", (event) => {
+document.addEventListener("scroll", () => {
   const scrollY = window.scrollY;
+  const innerHeight = window.innerHeight;
+
+  // Scroll of Header
   const elmHeader = document.getElementById("header");
   if (scrollY >= 300) {
     elmHeader.classList.add("header-scroll");
   } else {
     elmHeader.classList.remove("header-scroll");
+  }
+
+  // Show colors
+  const elmMain = document.getElementById("main");
+  const elmWrapper = document.getElementById("wrapper");
+  const elmWrapperColor = document.getElementById("wrapper-color");
+  const offsetTopMain = elmMain.offsetTop;
+  if (scrollY >= offsetTopMain && elmWrapper.offsetTop > scrollY) {
+    elmWrapperColor.style.opacity = 1;
+    const percentDetail = Math.ceil((scrollY - (offsetTopMain - 300)) / 10);
+    const percent = Math.ceil(percentDetail / 10) * 10;
+    hdlShowColor(percent);
+    hdlShowText(percentDetail);
+  } else {
+    elmWrapperColor.style.opacity = 0;
+  }
+
+  // Show Clip path
+  const elmWrapperClipPath = document.getElementById("wrapper-clip-path");
+  const elmClipPath = document.getElementById("clip-path");
+  const scrollInnerHeight = scrollY + innerHeight;
+  const offsetTopWrapper = elmWrapperClipPath.offsetTop;
+
+  if (offsetTopWrapper <= scrollInnerHeight) {
+    const remainClipPathHeight = offsetTopWrapper - scrollY;
+    if (clipPathHeight === 0) {
+      clipPathHeight = remainClipPathHeight;
+    }
+
+    const percentClipPath = (remainClipPathHeight / clipPathHeight) * 100;
+    if (percentClipPath < -100 || percentClipPath > 100) return;
+
+    const slashClipPath = (100 - percentClipPath) / 100;
+    elmClipPath.style.setProperty("--slash", slashClipPath);
+  } else {
+    clipPathHeight = 0;
+    elmClipPath.style.setProperty("--slash", 0);
   }
 });
 
@@ -251,7 +401,7 @@ const hdlClickPaginate = () => {
 };
 
 const hdlScrollBody = () => {
-  const elmMain = document.getElementById("main");
+  const elmMain = document.getElementById("wrapper");
   const subTop = screen.width >= 912 ? 20 : 40;
-  window.scrollBy(0, elmMain.offsetTop - subTop)
-}
+  window.scrollBy(0, elmMain.offsetTop - subTop);
+};

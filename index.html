@@ -76,12 +76,32 @@
     </section>
 
     <main id="main">
-      <div class="row wrapper" id="wrapper"></div>
+      <div id="wrapper-color" class="wrapper-color">
+        <div class="wrapper-color-text">
+          <h2 id="color-title">c o l o u r</h2>
+          <h4 id="color-subtitle">"Living a life full of fresh colors makes every day of our lives more meaningful."</h4>
+        </div>
+        <div id="colors" class="colors">
+          <div id="color-1" class="color-1"></div>
+          <div id="color-2" class="color-2"></div>
+          <div id="color-3" class="color-3"></div>
+          <div id="color-4" class="color-4"></div>
+        </div>
+      </div>
+
+      <div id="wrapper-clip-path" class="wrapper-clip-path">
+        <div id="clip-path" class="clip-path"></div>
+      </div>
+
+      <div class="row wrapper" id="wrapper">
+        <h2 class="title">Gallery</h2>
+      </div>
       <div class="d-flex justify-content-center mt-4">
         <button
           class="btn btn-outline-light px-3"
           id="buttonPaginate"
           onclick="hdlClickPaginate()"
+          style="z-index: 1;"
         >
           load more...
         </button>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>totolist</title>
+
+    <style>
+      .wrapper {
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      h3 {
+        color: grey;
+      }
+      ul {
+        padding: 0;
+        margin: auto;
+        width: 300px;
+      }
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 10px 0;
+        border-bottom: 1px solid grey;
+      }
+
+      .input-todo {
+        padding: 5px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .btn-add-todo {
+        padding: 5px 15px;
+        background: transparent;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .btn-add-todo:hover {
+        background-color: #ccc;
+      }
+
+      .todo input {
+        margin-right: 8px;
+      }
+
+      .todo span {
+        font-size: 18px;
+        color: grey;
+      }
+
+      .close {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <input
+        type="input"
+        class="input-todo"
+        id="inputTodo"
+        placeholder="Input todo..."
+      />
+      <button onclick="hdlAddTodo()" class="btn-add-todo">Add</button>
+      <h3>Things I've Gotta Get Done</h3>
+      <ul id="list"></ul>
+    </div>
+
+    <script>
+      var eleClose = document.getElementsByClassName("close");
+      var eleInputTodo = document.getElementById("inputTodo");
+
+      // Click on a close button to hide the current list item
+      var i;
+      for (i = 0; i < eleClose.length; i++) {
+        console.log("eleClose", eleClose);
+        eleClose[i].onclick = function () {
+          var div = this.parentElement;
+          div.style.display = "none";
+        };
+      }
+
+      function hdlAddTodo() {
+        if (eleInputTodo.value === "") {
+          alert("Please input todo.");
+          return;
+        }
+
+        var eleLi = document.createElement("li");
+
+        var eleDiv = document.createElement("div");
+        eleDiv.className = "todo";
+        var checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        eleDiv.appendChild(checkbox);
+
+        var eleSpan = document.createElement("span");
+        eleSpan.innerHTML = eleInputTodo.value;
+        eleDiv.appendChild(eleSpan);
+
+        eleLi.appendChild(eleDiv);
+
+        var span = document.createElement("span");
+        span.innerHTML = "x";
+        span.className = "close";
+        span.onclick = function () {
+          // Onclick Delete Todo
+          this.parentElement.remove();
+        };
+        eleLi.appendChild(span);
+
+        document.getElementById("list").appendChild(eleLi);
+        eleInputTodo.value = "";
+      }
+    </script>
+  </body>
+</html>
