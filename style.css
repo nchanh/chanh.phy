@@ -19,7 +19,7 @@
 body {
   padding: 0;
   margin: 0;
-  background-color: var(--hex-5);
+  background: var(--hex-5);
 
   font-family: "Josefin Sans", "Times New Roman", Times, serif;
   color: var(--hex-1);
@@ -40,7 +40,7 @@ body {
 
 .wrapper-scroll-indicator {
   height: 100%;
-  width: 10%;
+  width: 0;
   background-color: var(--hex-5);
 }
 
@@ -176,6 +176,8 @@ main .wrapper-color .wrapper-color-text {
 }
 
 main .wrapper-color .wrapper-color-text h2 {
+  --slash: 0;
+
   color: transparent;
   font-size: 140px;
   text-transform: uppercase;
@@ -189,7 +191,6 @@ main .wrapper-color .wrapper-color-text h2 {
     var(--hex-0) var(--slash),
     var(--hex-5) var(--slash)
   );
-  --slash: 0;
 }
 
 main .wrapper-color .wrapper-color-text h4 {
@@ -208,7 +209,7 @@ main .wrapper-color .colors {
 }
 
 main .wrapper-color .colors div {
-  transition: all 0.1s ease-in-out;
+  transition: all 0.4s ease-in-out;
   width: 15vw;
   height: 15vw;
   border-radius: 6px;
@@ -239,17 +240,12 @@ main .wrapper-color .colors .color-4 {
 
 main .wrapper-clip-path {
   position: sticky;
-  height: 80vh;
-  background: linear-gradient(
-    to right,
-    #f0c74f 0%,
-    #f97d3f 37.5%,
-    #2c97ca 62.75%,
-    #65d9fe 100%
-  );
+  height: 66vh;
 }
 
 main .wrapper-clip-path .clip-path {
+  --slash-cut: calc(50vw + 50vh * 0.7);
+  --slash: 0;
   position: fixed;
   height: 100vh;
   width: 100vw;
@@ -261,8 +257,6 @@ main .wrapper-clip-path .clip-path {
     calc(100vw - (1 + var(--slash)) * var(--slash-cut)) 100%
   );
   background: black;
-  --slash-cut: calc(50vw + 50vh * 0.7);
-  --slash: 0;
 }
 
 main .wrapper {
@@ -335,6 +329,7 @@ main .wrapper .item .image-info .btn-link {
   text-decoration: none;
   padding: 9px 24px 8px 23px;
 }
+
 main .wrapper .item .image-info .btn-link:hover {
   background-color: var(--hex-0);
   color: var(--hex-4);
@@ -369,6 +364,9 @@ main .wrapper .item .overlay {
 }
 
 footer {
+  position: relative;
+  z-index: 1;
+
   padding: 15px;
   text-align: center;
   font-weight: 100;
@@ -376,8 +374,8 @@ footer {
 }
 
 /*
- * Start: Loading
- */
+* Start: Loading
+*/
 
 .loading {
   position: absolute;
@@ -412,8 +410,8 @@ footer {
 }
 
 /*
- * End: Loading
- */
+* End: Loading
+*/
 
 @keyframes flip {
   0%,
@@ -423,8 +421,8 @@ footer {
 }
 
 /*
- * Start: Responsive
- */
+* Start: Responsive
+*/
 @media (max-width: 991.99px) {
   header .last {
     justify-content: center;
@@ -455,12 +453,12 @@ footer {
   }
 }
 /*
- * End: Responsive
- */
+* End: Responsive
+*/
 
 /*
- * Start: Pure CSS Animated Mouse Scroll Icon
- */
+* Start: Pure CSS Animated Mouse Scroll Icon
+*/
 .scroll-down-wrap {
   position: absolute;
   right: 0;
@@ -531,5 +529,5 @@ footer {
   }
 }
 /*
- * End: Pure CSS Animated Mouse Scroll Icon
- */
+* End: Pure CSS Animated Mouse Scroll Icon
+*/

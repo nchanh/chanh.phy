@@ -332,10 +332,12 @@ let clipPathHeight = 0;
 printPhotos(posts, idx);
 
 window.addEventListener("DOMContentLoaded", () => {
+  document.body.style.overflow = "hidden";
   hdlShowLoading();
 });
 
 window.addEventListener("load", () => {
+  document.body.style.overflow = "auto";
   hdlHideLoading();
 });
 
@@ -379,20 +381,20 @@ document.addEventListener("scroll", () => {
   const scrollInnerHeight = scrollY + innerHeight;
   const offsetTopWrapper = elmWrapperClipPath.offsetTop;
 
-  if (offsetTopWrapper <= scrollInnerHeight) {
-    const remainClipPathHeight = offsetTopWrapper - scrollY;
-    if (clipPathHeight === 0) {
-      clipPathHeight = remainClipPathHeight;
+  if (item.name === "color-1" || item.name === "color-4") {
+    if (percent >= 100) {
+      document.body.style.background = bgColor14;
+    } else {
+      document.body.style.background = "#0d0d0d";
     }
+  }
 
-    const percentClipPath = (remainClipPathHeight / clipPathHeight) * 100;
-    if (percentClipPath < -100 || percentClipPath > 100) return;
-
-    const slashClipPath = (100 - percentClipPath) / 100;
-    elmClipPath.style.setProperty("--slash", slashClipPath);
-  } else {
-    clipPathHeight = 0;
-    elmClipPath.style.setProperty("--slash", 0);
+  if (item.name === "color-2" || item.name === "color-3") {
+    if (percent >= 100) {
+      document.body.style.background = bgColorFull;
+    } else {
+      document.body.style.background = bgColor14;
+    }
   }
 });
 
